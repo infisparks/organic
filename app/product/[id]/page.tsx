@@ -3,7 +3,7 @@ import Link from "next/link";
 import ProductDetails from "./ProductDetails";
 import { notFound } from "next/navigation";
 
-// This data would typically come from a database or API
+// Unified products array containing all products
 export const products = [
   {
     id: "1",
@@ -16,24 +16,57 @@ export const products = [
       "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixlib=rb-4.0.3",
     company: {
       name: "Green Valley Farms",
-      logo: "https://i.pravatar.cc/150?img=1",
+      logo: "https://i.pravatar.cc/150?img=1"
     },
     nutrients: [
       { name: "Protein", value: "2g" },
       { name: "Fat", value: "15g" },
       { name: "Carbs", value: "9g" },
-      { name: "Fiber", value: "7g" },
-    ],
+      { name: "Fiber", value: "7g" }
+    ]
   },
+  {
+    id: "2",
+    name: "Fresh Strawberries",
+    description:
+      "Sweet and juicy organic strawberries, perfect for a healthy snack or dessert.",
+    price: 199,
+    oldPrice: 249,
+    image:
+      "https://images.unsplash.com/photo-1518635017480-01eb763f1fbb?ixlib=rb-4.0.3",
+    company: {
+      name: "Nature's Best",
+      logo: "https://i.pravatar.cc/150?img=2"
+    },
+    nutrients: [
+      { name: "Vitamin C", value: "50mg" },
+      { name: "Fiber", value: "3g" }
+    ]
+  },
+  {
+    id: "3",
+    name: "Organic Honey",
+    description:
+      "Pure, raw honey from local organic beekeepers, offering a natural sweetness.",
+    price: 499,
+    image:
+      "https://images.unsplash.com/photo-1587049352847-81a56d773cae?ixlib=rb-4.0.3",
+    company: {
+      name: "Himalayan Organics",
+      logo: "https://i.pravatar.cc/150?img=3"
+    },
+    nutrients: [
+      { name: "Carbs", value: "17g" },
+      { name: "Sugar", value: "16g" }
+    ]
+  }
 ];
 
 export async function generateStaticParams() {
-  // Ensure that every product has a valid id and convert it to a string.
-  return products
-    .filter((product) => product.id)
-    .map((product) => ({
-      id: product.id.toString(),
-    }));
+  // Return all ids as static params
+  return products.map((product) => ({
+    id: product.id.toString(),
+  }));
 }
 
 export default async function ProductPage({
@@ -44,7 +77,6 @@ export default async function ProductPage({
   const product = products.find((p) => p.id === params.id);
 
   if (!product) {
-    // If no product is found, render the 404 page.
     return notFound();
   }
 

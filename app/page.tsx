@@ -60,7 +60,7 @@ const categories = [
   }
 ];
 
-// Updated products array with an "id" for each product
+// Updated products array with "id" for each product (same as used in product page)
 const products = [
   {
     id: "1",
