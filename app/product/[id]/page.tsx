@@ -3,8 +3,9 @@ import Link from "next/link";
 import ProductDetails from "./ProductDetails";
 import { notFound } from "next/navigation";
 
-// Unified products array containing all products
-export const products = [
+// Local products array used only in this file.
+// Remove the "export" keyword to avoid Next.js interpreting it as a page export.
+const products = [
   {
     id: "1",
     name: "Organic Avocados",
@@ -63,7 +64,6 @@ export const products = [
 ];
 
 export async function generateStaticParams() {
-  // Return all ids as static params
   return products.map((product) => ({
     id: product.id.toString(),
   }));
